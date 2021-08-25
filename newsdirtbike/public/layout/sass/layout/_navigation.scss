@@ -1,0 +1,887 @@
+/*-------------------------------------------------------*/
+/* Navigation
+/*-------------------------------------------------------*/
+.nav {
+  min-height: $nav-height;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 120;
+  position: relative;
+  @include transition(height .3s ease-in-out);
+
+  &__holder {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(#000, .10);
+  }
+
+  &__wrap {
+    padding-left: 40px;
+  }
+
+  &__menu,
+  &__dropdown-menu {
+    list-style: none;
+  }
+
+  &__menu {
+    position: relative;
+    @include display-inline-flex;
+    align-items: center;
+
+    & > li {
+      position: relative;
+
+      &.active a:before,
+      &:hover a:before {
+        width: 100%;
+      }
+    }
+
+    & > li > a {
+      font-family: $body-font;
+      color: $nav-color;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0 16px;
+      display: block;
+      position: relative;
+      line-height: $nav-height;
+
+      &:hover {
+        color: $main-color;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        background-color: $main-color;
+        @include transition($all);
+      }
+    }
+  }
+
+  &__dropdown > a:after {
+    content: '\f123';
+    font-family: 'ui-icons';
+    margin-left: 7px;
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  &__dropdown &__dropdown > a:after {
+    content: '\e804';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    @include transform(translateY(-50%));
+  }
+
+  /* Dropdowns (large screen) */
+  @include bp-lg-up {
+
+    &__menu > li {
+      display: inline-block;
+      text-align: center;
+    }
+
+    &__dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 10px 0;
+      z-index: 1000;
+      min-width: 200px;
+      width: 100%;
+      text-align: left;
+      list-style: none;
+      white-space: nowrap;
+      background-color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .10);
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      display: block;
+      visibility: hidden;
+      opacity: 0;
+      @include transition (all .1s ease-in-out);
+
+
+      & > li > a {
+        color: $text-color;
+        padding: 8px 22px;
+        font-size: 14px;
+        display: block;
+
+        &:hover {
+          color: $main-color;
+        }
+      }
+    }
+
+    &__dropdown-menu.hide-dropdown {
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+
+    &__dropdown-menu--right {
+      right: 0;
+    }
+
+    &__dropdown:hover > .nav__dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__dropdown-menu {
+      .nav__dropdown-menu {
+        left: 100%;
+        top: -10px;
+      }
+    }
+
+    &__dropdown &__dropdown {
+      position: relative;
+    }
+
+    // Megamenu
+    &__megamenu {
+      padding: 32px 30px;
+
+      .row {
+        white-space: normal;
+      }
+    }
+
+    &__megamenu-item {
+      .entry {
+        margin-bottom: 0;
+      }
+
+      .entry__title {
+        font-size: 16px;
+      }
+    }   
+
+    &__megamenu-list a {
+      font-family: $heading-font;
+      display: block;
+      clear: both;
+      padding: 4px 0;
+      white-space: nowrap;
+      color: #b2b2b2;
+      font-size: 15px;
+    }
+  }
+}
+
+.mobile body {
+  cursor: pointer;
+}
+
+
+
+/* Nav Style 1
+-------------------------------------------------------*/
+.header {
+  padding: 30px 0;
+
+  &__menu-list {
+    li {
+      display: inline-block;
+      font-size: 14px;
+      margin-right: 19px;      
+    }
+
+    a {
+      color: $text-color;
+    }
+  }
+}
+
+.nav--1 {  
+
+  @include bp-lg-up {    
+    min-height: 82px;
+    
+    .container {
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        height: 2px;
+        background-color: $border-color;
+      }
+
+      &:after {
+        bottom: 0;
+      }
+    }
+
+    .nav--sticky,
+    .nav__menu > li > a {
+      height: 82px;
+    }
+
+    .nav__menu > li > a {
+      line-height: 82px;
+    }
+  }
+
+  .sticky {
+    height: $nav-height;
+
+    .nav__menu > li > a {
+      line-height: $nav-height;
+      height: $nav-height;
+    }
+  }
+
+  .nav__holder {
+    box-shadow: none;
+  }
+
+  .nav__wrap {
+    padding-left: 0;
+    flex: 4 0 0;
+    text-align: center;
+  }
+
+  .nav__menu > li > a:before {
+    display: none;
+  }
+}
+
+.home .nav--1 .container:after,
+.nav--1 .nav__holder.scrolling .container:after,
+.nav--1 .nav__holder.scrolling .container:before {
+  display: none;
+}
+
+
+/* Nav Style 2
+-------------------------------------------------------*/
+.nav--2 {
+
+  @include bp-lg-up {
+    min-height: 100px;
+
+    .nav__holder {
+      height: 100px;
+    }
+
+    .nav__menu > li > a {
+      line-height: 100px;
+    }
+  }
+
+  .nav__holder {    
+    box-shadow: none;
+  }
+
+  .nav__wrap {
+    padding-left: 0;
+    flex: 4 0 0;
+    text-align: center;
+  }
+
+  .nav__menu > li > a:before {
+    display: none;
+  }
+
+  .nav-icon-toggle {
+    margin-right: 48px;
+  }
+}
+
+/* Logo
+-------------------------------------------------------*/
+.logo {
+  line-height: 1;
+}
+
+.logo-holder {
+  @include display-flex;
+}
+
+
+/* Nav Flexbox
+-------------------------------------------------------*/
+header .flex-parent {
+  align-items: center;
+}
+
+header .flex-child {
+  flex: 1 0 0;
+  line-height: 1;
+}
+
+.nav--align-right {
+  margin-left: auto;
+}
+
+.nav--align-left {
+  margin-right: auto;
+}
+
+
+/* Nav Right
+-------------------------------------------------------*/
+.nav__right {
+  @include display-flex;
+  margin-left: auto;
+
+  &-item {
+    @include bp-lg-down {
+      margin-right: 0;
+    }
+  }
+
+  a:hover,
+  a:focus {
+    color: $main-color;
+  }
+}
+
+
+/* Nav Search
+-------------------------------------------------------*/
+.nav__search {
+  margin-left: auto;
+
+  &-box {
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    padding: 15px 20px;
+    background-color: $bg-light;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .10);
+  }
+
+  &-form {
+    position: relative;
+  }
+
+  &-input {
+    margin-bottom: 0;
+    display: block;
+    line-height: 40px;
+  }
+
+  &-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 !important;
+    width: 42px;
+  }
+
+  &-trigger {
+    color: $nav-color;
+    font-size: 23px;
+    display: inline-block;
+    width: 24px;
+    height: $nav-height;
+    line-height: $nav-height;
+    text-align: center;
+  }
+
+  .ui-close {
+    font-size: 20px;
+    position: relative;
+  }
+
+  @include bp-lg-down {
+    &-box {
+      width: 100%;
+    }  
+  }  
+}
+
+
+/* Mobile Search */
+.nav__search-mobile {
+
+  &-form {
+    position: relative;
+  }
+
+  &-input {
+    height: 46px;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 0;
+    font-family: $heading-font;
+    font-size: 13px;
+    color: $nav-color;
+    border-radius: 0;
+    border-bottom: 1px solid #182835;
+
+    &:focus {
+      background-color: transparent;
+      border-color: #fff;
+    }
+  }
+
+  &-submit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 46px;
+    height: 46px;
+    border: 0;
+    padding: 0;
+    font-size: 14px;
+    cursor: pointer;
+    color: #9AA3AB;
+    background-color: transparent;
+  }
+}
+
+/* Change Color of Placeholders */
+input.nav__search-mobile-input::-webkit-input-placeholder {
+  color: #9AA3AB;
+}
+
+input.nav__search-mobile-input:-moz-placeholder {
+  color: #9AA3AB;
+  opacity: 1;
+}
+
+input.nav__search-mobile-input::-moz-placeholder {
+  color: #9AA3AB;
+  opacity: 1;
+}
+
+input.nav__search-mobile-input:-ms-input-placeholder {
+  color: #9AA3AB;
+}
+
+
+/*-------------------------------------------------------*/
+/* Top Bar
+/*-------------------------------------------------------*/
+.top-bar {
+  background-color: $bg-dark;
+
+  .social {
+    color: #fff;
+  }
+}
+
+.top-menu {
+  li {
+    display: inline-block;
+    font-size: 14px;
+
+    &:first-child a {
+      padding-left: 0;
+    }
+
+    &:last-child a {
+      padding-right: 0;
+    }
+  }
+
+  a {
+    display: block;
+    padding: 0 10px;
+    line-height: 32px;
+    color: #fff;
+  }
+}
+
+
+/*-------------------------------------------------------*/
+/* Nav Mobile Sidenav
+/*-------------------------------------------------------*/
+.sidenav {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 320px;
+  z-index: 121;
+  overflow-y: auto;
+  @include transition( transform .5s cubic-bezier(0.55, 0, 0.1, 1) );
+  @include transform(translateX(-320px));
+
+  &--is-open {
+    @include transform(translateX(0));
+  }
+}
+
+.content-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 121;
+  visibility: hidden;
+  opacity: 0;
+  @include transition( .3s cubic-bezier(.16,.36,0,.98) );
+  background-color: rgba(#000,.5);
+
+  &--is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+/* Nav Icon Toggle
+-------------------------------------------------------*/
+.nav-icon-toggle {
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+  @include transition( 0.15s linear );
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin-right: 20px;
+  overflow: visible;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__box {
+    width: 18px;
+    height: 20px;
+    position: relative;
+    display: block;
+  }
+
+  &__inner {
+    display: block;
+    top: 50%;
+    margin-top: -1px;
+    margin-left: 3px;
+    width: 15px;
+  }
+
+  &__inner,
+  &__inner:before,
+  &__inner:after {
+    height: 2px;
+    background-color: $nav-color;
+    position: absolute;
+    @include transition( .2s all );
+  }
+
+  &:hover .nav-icon-toggle__inner,
+  &:hover .nav-icon-toggle__inner:before,
+  &:hover .nav-icon-toggle__inner:after {
+    background-color: $main-color;
+  }
+
+  &__inner:before,
+  &__inner:after {
+    content: "";
+    display: block;
+    margin-left: -3px;
+  }
+
+  &__inner:before {
+    top: -6px;
+    width: 18px;
+  }
+
+  &__inner:after {
+    bottom: -6px;
+    width: 18px;
+  }
+}
+
+
+/* Sidenav Menu
+-------------------------------------------------------*/
+.sidenav__menu {
+
+  &-container {
+    margin-top: 52px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    position: relative;
+    border-bottom: 1px solid $border-color;
+    font-size: 14px;
+
+    &:last-child {
+      border-bottom: 0;
+    }  
+  }
+  
+  &-dropdown {
+    overflow: hidden;
+    display: none;
+    background-color: $bg-light;
+
+    li {
+      border-color: darken($border-color, 3%);
+      padding-left: 10px;
+
+      &:first-child {
+        border-top: 1px solid $border-color;
+      }
+    }
+
+    a {
+      font-weight: 400;
+      font-family: $body-font;
+    }
+
+    a,
+    &:hover,
+    .sidenav__menu-toggle {
+      color: $nav-color;
+    }
+  }
+  
+  &-toggle {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    color: $text-color;
+    font-size: 12px;
+    padding: 0;
+    width: 46px;
+    height: 46px;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &--is-open > a {
+    background-color: $bg-light;
+    color: $heading-color;
+
+    &:hover {
+      color: $heading-color;
+    }
+  }
+
+  &--is-open > .sidenav__menu-toggle {
+    @include transform(rotate(180deg));
+    color: $text-color;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+
+  &-url {
+    width: 100%;
+    display: block;
+    color: $text-color;
+    padding: 12px 22px;
+    font-family: $heading-font;
+    font-size: 15px;
+    font-weight: 600;
+    @include transition(background .3s ease);
+
+    &:hover,
+    &:focus {
+      color: $main-color;
+    }
+  }   
+}
+
+
+// Sidenav Close
+.sidenav__close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+
+  &-button {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: $nav-color;
+    width: 24px;
+    height: 24px;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  &-icon {
+    font-size: 22px;
+    line-height: 24px;
+  }
+}
+
+
+/* Sidenav Socials
+-------------------------------------------------------*/
+.sidenav__socials {
+  padding: 0 22px;
+  margin-top: 20px;
+}
+
+/* Sticky Nav
+-------------------------------------------------------*/
+.nav--sticky {  
+  height: $nav-height;  
+
+  &.offset {
+    @include transform (translate3d(0, -100%, 0));
+    @include transition ($all);
+  }
+
+  &.scrolling {
+    @include transform (translate3d(0, 0px, 0));
+  }
+
+  &.sticky {
+  position: fixed;
+  background-color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  left: 0;
+  right: 0;
+  height: $nav-height;
+  top: 0;
+  box-shadow: 0 0 5px rgba(0,0,0,.1);
+  z-index: 120;
+
+    &.scrolling {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav__menu > li > a {
+      line-height: $nav-height;
+    }
+
+    .logo-wrap a {
+      height: $nav-height;
+    }
+  }
+}
+
+
+/* Colored Nav
+-------------------------------------------------------*/
+.nav--colored {
+  .nav__holder {
+    background-color: $main-color;
+    box-shadow: none;
+  }
+
+  .nav__menu > li > a,
+  .nav__menu > li > a:hover,
+  .nav__search-trigger,
+  .nav__right a:hover,
+  .nav__right a:focus {
+    color: #fff;
+  }
+
+  .nav-icon-toggle__inner,
+  .nav-icon-toggle__inner:before,
+  .nav-icon-toggle__inner:after,
+  .nav-icon-toggle:hover .nav-icon-toggle__inner,
+  .nav-icon-toggle:hover .nav-icon-toggle__inner:before,
+  .nav-icon-toggle:hover .nav-icon-toggle__inner:after {
+    background-color: #fff;
+  }
+}
+  
+
+/* Go to Top
+-------------------------------------------------------*/
+#back-to-top {
+  display: block;
+  z-index: 100;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  font-size: 12px;
+  position: fixed;
+  bottom: -34px;
+  right: 20px;
+  line-height: 32px;
+  background-color: rgba($bg-dark, .5);
+  box-shadow: 1px 1.732px 12px 0px rgba(0, 0, 0, 0.03);
+  @include transition ($all);
+  text-decoration: none;
+
+  i {
+    @include transition ($all);
+  }
+
+  a {
+    display: block;
+    color: #fff;
+  }
+
+  &.show {
+    bottom: 20px;
+  }
+
+  &:hover {
+    background-color: $main-color;
+    border-color: transparent;
+  }
+
+  &:hover i {
+    color: #fff;
+  }
+}
+
+
+/*-------------------------------------------------------*/
+/* Nav Mobile Styles
+/*-------------------------------------------------------*/
+
+@include bp-lg-down {
+
+  .nav {
+
+    &__header {
+      height: $nav-height;
+    }
+
+    &__wrap {
+      text-align: left;
+    }
+  }
+
+  // Logo
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+    height: $nav-height;
+    line-height: $nav-height;
+    text-align: center;
+  }
+}
